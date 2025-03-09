@@ -1,10 +1,15 @@
 #!/bin/sh
 
-source /opt/intel/oneapi/setvars.sh
-export USE_XETLA=OFF
+# Reference: https://github.com/intel/ipex-llm/blob/main/docs/mddocs/Quickstart/ollama_quickstart.md#3-run-ollama-serve
+export OLLAMA_NUM_GPU=999
+export no_proxy=localhost,127.0.0.1
 export ZES_ENABLE_SYSMAN=1
+
+source /opt/intel/oneapi/setvars.sh
 export SYCL_CACHE_PERSISTENT=1
+# [optional] under most circumstances, the following environment variable may improve performance, but sometimes this may also cause performance degradation
 export SYCL_PI_LEVEL_ZERO_USE_IMMEDIATE_COMMANDLISTS=1
+# [optional] if you want to run on single GPU, use below command to limit GPU may improve performance
 export ONEAPI_DEVICE_SELECTOR=level_zero:0
 
 /usr/local/lib/python3.12/dist-packages/bigdl/cpp/libs/ollama serve

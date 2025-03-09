@@ -1,11 +1,9 @@
-version: "1.0"
+version: '3'
 services:
-  ollama-ipex-llm:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: ollama-ipex-llm
-    image: ollama-ipex-llm:latest
+  ollama-intel-arc:
+    build: .
+    image: ollama-intel-arc:latest
+    container_name: ollama-intel-arc
     restart: unless-stopped
     devices:
       - /dev/dri:/dev/dri
@@ -19,7 +17,7 @@ services:
     volumes:
       - open-webui-volume:/app/backend/data
     depends_on:
-      - ollama-ipex-llm
+      - ollama-intel-arc
     ports:
       - 3000:8080
     environment:
