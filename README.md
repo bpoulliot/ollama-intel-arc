@@ -9,9 +9,9 @@ This repository provides a convenient way to run Ollama as a backend and Open We
 
 ## Services
 1. Ollama  
-   * Runs llama.cpp and Ollama with IPEX-LLM on your Linux computer with Intel GPU.  
-   * Built following the guidelines from [Intel](https://github.com/intel-analytics/ipex-llm/blob/main/docs/mddocs/Quickstart/llama_cpp_quickstart.md).  
-   * Uses [Ubuntu 24.04 LTS](https://ubuntu.com/blog/tag/ubuntu-24-04-lts), Ubuntu's latest stable version, as a container.
+   * Runs llama.cpp and Ollama with IPEX-LLM on your Linux computer with Intel Arc GPU.  
+   * Built following the guidelines from [Intel](https://github.com/intel/ipex-llm/blob/main/docs/mddocs/DockerGuides/README.md).  
+   * Uses the official [Intel ipex-llm docker image](https://hub.docker.com/r/intelanalytics/ipex-llm-inference-cpp-xpu) as the base container.
    * Uses the latest versions of required packages, prioritizing cutting-edge features over stability.  
    * Exposes port `11434` for connecting other tools to your Ollama service.
 
@@ -29,7 +29,12 @@ $ podman compose up
 ```
 
 ## Validate
-You should see this partial output in your console, indicating your arc gpu was detected
+Run the following command to verify your Ollama instance is up and running
+```bash
+$ curl http://localhost:11434/
+Ollama is running
+```
+When using Open WebUI, you should see this partial output in your console, indicating your arc gpu was detected
 ```bash
 [ollama-intel-arc] | Found 1 SYCL devices:
 [ollama-intel-arc] | |  |                   |                                       |       |Max    |        |Max  |Global |                     |
@@ -38,13 +43,8 @@ You should see this partial output in your console, indicating your arc gpu was 
 [ollama-intel-arc] | |--|-------------------|---------------------------------------|-------|-------|--------|-----|-------|---------------------|
 [ollama-intel-arc] | | 0| [level_zero:gpu:0]|                     Intel Arc Graphics|  12.71|    128|    1024|   32| 62400M|         1.6.32224+14|
 ```
-Run the following command to verify your Ollama instance is up and running
-```bash
-$ curl http://localhost:11434/
-Ollama is running
-```
+
 ## Usage
-* Run the services using the setup instructions above.  
 * Open your web browser to http://localhost:3000 to access the Open WebUI web page.  
 * For more information on using Open WebUI, refer to the official documentation at https://docs.openwebui.com/ .
 
@@ -55,7 +55,7 @@ $ podman compose down
 ```
 
 ### ollama-intel-arc Image
-If there are new updates in ipex-llm[cpp] or oneAPI or GPU drivers, you may want to update the Ollama image and containers, to stay updated.
+If there are new updates in the [ipex-llm docker image](https://hub.docker.com/r/intelanalytics/ipex-llm-inference-cpp-xpu), you may want to update the Ollama image and containers, to stay updated.
 
 First check any containers running the docker image, and remove them
 ```bash
@@ -89,16 +89,14 @@ You can connect directly to your Ollama container by running these commands:
 
 ```bash
 $ podman exec -it ollama-intel-arc /bin/bash
-> source /opt/intel/oneapi/setvars.sh
-> /usr/local/lib/python3.12/dist-packages/bigdl/cpp/libs/ollama -v
+$ /llm/ollama/ollama -v
 ```
 
 ## My development environment:
 * Core Ultra 7 155H
 * Intel® Arc™ Graphics (Meteor Lake-P)
-* Fedora 40
+* Fedora 41
 
-## References
-* [Intel guidelines for installing Linux GPU support](https://github.com/intel-analytics/ipex-llm/blob/main/docs/mddocs/Quickstart/install_linux_gpu.md)  
+## References 
 * [Open WebUI documentation](https://docs.openwebui.com/)
-* [Ollama Quickstart](https://github.com/intel/ipex-llm/blob/main/docs/mddocs/Quickstart/ollama_quickstart.md)
+* [Intel - ipex-llm](https://github.com/intel/ipex-llm/blob/main/docs/mddocs/DockerGuides/docker_cpp_xpu_quickstart.md)
