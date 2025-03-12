@@ -48,40 +48,23 @@ When using Open WebUI, you should see this partial output in your console, indic
 * Open your web browser to http://localhost:3000 to access the Open WebUI web page.  
 * For more information on using Open WebUI, refer to the official documentation at https://docs.openwebui.com/ .
 
-## Updating the images
+## Updating the containers
+If there are new updates in the [ipex-llm-inference-cpp-xpu](https://hub.docker.com/r/intelanalytics/ipex-llm-inference-cpp-xpu) docker Image or in the Open WebUI docker Image, you may want to update your containers, to stay up to date.
+
 Before any updates, be sure to stop your containers
 ```bash
 $ podman compose down 
 ```
 
-### ollama-intel-arc Image
-If there are new updates in the [ipex-llm docker image](https://hub.docker.com/r/intelanalytics/ipex-llm-inference-cpp-xpu), you may want to update the Ollama image and containers, to stay updated.
-
-First check any containers running the docker image, and remove them
-```bash
-$ podman ps -a
-CONTAINER ID  IMAGE
-111479fde20f  localhost/ollama-intel-arc:latest
-
-$ podman rm <CONTAINER ID> 
-```
-
-The go ahead and remove the docker image:
-```bash
-$ podman image list
-REPOSITORY                     TAG
-localhost/ollama-intel-arc     latest
-
-$ podman rmi <IMAGE ID>
-```
-After that, you can run compose up, to rebuild the image from scratch
-```bash
-$ podman compose up
-```
-### open-webui Image
-If there are new updates in Open WebUI, just do a pull and the new changes will be retrieved automatically.
+Then just run a pull command to retrieve the `latest` images.
 ```bash
 $ podman compose pull
+```
+
+
+After that, you can run compose up to start your services again.
+```bash
+$ podman compose up
 ```
 
 ## Manually connecting to your Ollama container

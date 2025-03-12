@@ -1,8 +1,7 @@
 version: '3'
 services:
   ollama-intel-arc:
-    build: .
-    image: ollama-intel-arc:latest
+    image: intelanalytics/ipex-llm-inference-cpp-xpu:latest
     container_name: ollama-intel-arc
     restart: unless-stopped
     devices:
@@ -11,6 +10,15 @@ services:
       - ollama-volume:/root/.ollama
     ports:
       - 11434:11434
+    environment:
+      - no_proxy=localhost,127.0.0.1
+      - OLLAMA_HOST=0.0.0.0
+      - DEVICE=Arc
+      - OLLAMA_INTEL_GPU=true
+      - OLLAMA_NUM_GPU=999
+      - ZES_ENABLE_SYSMAN=1
+    command: sh -c 'mkdir -p /llm/ollama && cd /llm/ollama && init-ollama && exec ./ollama serve'
+
   open-webui:
     image: ghcr.io/open-webui/open-webui:latest
     container_name: open-webui
