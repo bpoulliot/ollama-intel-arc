@@ -99,4 +99,4 @@ $ /llm/ollama/ollama -v
 
 ## References 
 * [Open WebUI documentation](https://docs.openwebui.com/)
-* [Intel - ipex-llm](https://github.com/intel/ipex-llm/blob/main/docs/mddocs/DockerGuides/docker_cpp_xpu_quickstart.md)
+* [Intel ipex-llm releases](https://github.com/intel/ipex-llm/releases)
