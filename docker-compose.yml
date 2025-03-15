@@ -24,9 +24,38 @@ services:
       - WEBUI_AUTH=False
       - ENABLE_OPENAI_API=False
       - ENABLE_OLLAMA_API=True
+      - ENABLE_IMAGE_GENERATION=True
+      - IMAGE_GENERATION_ENGINE=automatic1111
+      - IMAGE_GENERATION_MODEL=dreamshaper_8
+      - IMAGE_SIZE=400x400
+      - IMAGE_STEPS=30
+      - AUTOMATIC1111_BASE_URL=http://sdnext-ipex:7860/
+      - AUTOMATIC1111_CFG_SCALE=9
+      - AUTOMATIC1111_SAMPLER=DPM++ SDE
+      - AUTOMATIC1111_SCHEDULER=Karras
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
+
+  sdnext-ipex:
+    build:
+      context: sdnext
+      dockerfile: Dockerfile
+    image: sdnext-ipex:latest
+    container_name: sdnext-ipex
+    restart: unless-stopped
+    devices:
+      - /dev/dri:/dev/dri
+    ports:
+      - 7860:7860
+    volumes:
+      - sdnext-app-volume:/app
+      - sdnext-mnt-volume:/mnt
+      - sdnext-huggingface-volume:/root/.cache/huggingface
+
 volumes:
   ollama-volume: {}
   open-webui-volume: {}
+  sdnext-app-volume: {}
+  sdnext-mnt-volume: {}
+  sdnext-huggingface-volume: {}
