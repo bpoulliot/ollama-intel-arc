@@ -20,16 +20,22 @@ streamline Stable Diffusion capabilities, all while tapping into the power of In
    * `ENABLE_OPENAI_API` and `ENABLE_OLLAMA_API` flags are set to off and on, respectively, allowing interactions via Ollama only.
    * `ENABLE_IMAGE_GENERATION` is set to true, allowing you to generate images from the UI.
    * `IMAGE_GENERATION_ENGINE` is set to automatic1111 (SD.Next is compatible).
-3. SD.Next
+
+4. SD.Next
    * Uses as the base container the official [Intel® Extension for PyTorch](https://pytorch-extension.intel.com/installation?platform=gpu&version=v2.6.10%2Bxpu&os=linux%2Fwsl2&package=docker)
    * Uses a customized version of the SD.Next [docker file](https://github.com/vladmandic/sdnext/blob/dev/configs/Dockerfile.ipex), making it compatible with the Intel Extension for Pytorch image.
 
 ## Setup
-Run the following commands to start your AI instance
+Run the following commands to start your Ollama instance with Open WebUI
 ```bash
 $ git clone https://github.com/eleiton/ollama-intel-arc.git
 $ cd ollama-intel-arc
 $ podman compose up
+```
+
+Additionally, if you want to run the SD.Next service for image generation, run this command in a different terminal:
+```bash
+$ podman compose -f docker-compose.sdnext.yml up
 ```
 
 ## Validate
