@@ -1,8 +1,12 @@
 # Run Ollama and Stable Diffusion with your Intel Arc GPU
 
 Effortlessly deploy a Docker-based solution that uses [Open WebUI](https://github.com/open-webui/open-webui) as your user-friendly 
-AI Interface, [Ollama](https://github.com/ollama/ollama) for integrating Large Language Models (LLM), and [SD.Next](https://github.com/vladmandic/sdnext) to 
-streamline Stable Diffusion capabilities, all while tapping into the power of Intel Arc Series GPUs on Linux systems by using [Intel® Extension for PyTorch](https://github.com/intel/intel-extension-for-pytorch).
+AI Interface and [Ollama](https://github.com/ollama/ollama) for integrating Large Language Models (LLM).
+
+Additionally, you can run [ComfyUI](https://github.com/comfyanonymous/ComfyUI) or [SD.Next](https://github.com/vladmandic/sdnext) docker containers to 
+streamline Stable Diffusion capabilities
+
+All these containers have been optimized for Intel Arc Series GPUs on Linux systems by using [Intel® Extension for PyTorch](https://github.com/intel/intel-extension-for-pytorch).
 
 ![screenshot](resources/open-webui.png)
 
@@ -15,13 +19,18 @@ streamline Stable Diffusion capabilities, all while tapping into the power of In
    * Exposes port `11434` for connecting other tools to your Ollama service.
 
 2. Open WebUI  
-   * The official distribution of Open WebUI.  
+   * Uses the official distribution of Open WebUI.  
    * `WEBUI_AUTH` is turned off for authentication-free usage.  
    * `ENABLE_OPENAI_API` and `ENABLE_OLLAMA_API` flags are set to off and on, respectively, allowing interactions via Ollama only.
    * `ENABLE_IMAGE_GENERATION` is set to true, allowing you to generate images from the UI.
    * `IMAGE_GENERATION_ENGINE` is set to automatic1111 (SD.Next is compatible).
 
+3. ComfyUI
+   * The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface.
+   * Uses as the base container the official [Intel® Extension for PyTorch](https://pytorch-extension.intel.com/installation?platform=gpu&version=v2.6.10%2Bxpu&os=linux%2Fwsl2&package=docker)
+
 4. SD.Next
+   * All-in-one for AI generative image based on Automatic1111
    * Uses as the base container the official [Intel® Extension for PyTorch](https://pytorch-extension.intel.com/installation?platform=gpu&version=v2.6.10%2Bxpu&os=linux%2Fwsl2&package=docker)
    * Uses a customized version of the SD.Next [docker file](https://github.com/vladmandic/sdnext/blob/dev/configs/Dockerfile.ipex), making it compatible with the Intel Extension for Pytorch image.
 
@@ -33,7 +42,14 @@ $ cd ollama-intel-arc
 $ podman compose up
 ```
 
-Additionally, if you want to run the SD.Next service for image generation, run this command in a different terminal:
+Additionally, if you want to run one or more of the image generation tools, run these command in a different terminal:
+
+For ComfyUI
+```bash
+$ podman compose -f docker-compose.comfyui.yml up
+```
+
+For SD.Next
 ```bash
 $ podman compose -f docker-compose.sdnext.yml up
 ```
@@ -54,7 +70,7 @@ When using Open WebUI, you should see this partial output in your console, indic
 [ollama-intel-arc] | | 0| [level_zero:gpu:0]|                     Intel Arc Graphics|  12.71|    128|    1024|   32| 62400M|         1.6.32224+14|
 ```
 
-## Usage
+## Using Image Generation
 * Open your web browser to http://localhost:7860 to access the SD.Next web page.
 * For the purposes of this demonstration, we'll use the [DreamShaper](https://civitai.com/models/4384/dreamshaper) model.
 * Follow these steps:
