@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  comfyui-ipex:
+    build:
+      context: comfyui
+      dockerfile: Dockerfile
+    image: comfyui-ipex:latest
+    container_name: comfyui-ipex
+    devices:
+      - /dev/dri:/dev/dri
+    ports:
+      - 8188:8188
+    volumes:
+      - comfyui-app-volume:/app
+      - comfyui-python-volume:/usr/local/lib/python3.10
+    environment:
+      - no_proxy=localhost,127.0.0.1
+
+volumes:
+  comfyui-app-volume: {}
+  comfyui-python-volume: {}
