@@ -79,8 +79,8 @@ When using Open WebUI, you should see this partial output in your console, indic
 * (Optional) If you want to stay in the SD.Next UI, feel free to explore (3).
 ![screenshot](resources/sd.next.png)
 * For more information on using SD.Next, refer to the official [documentation](https://vladmandic.github.io/sdnext-docs/).
-* Open your web browser to http://localhost:3000 to access the Open WebUI web page.
-* Go to the administrator [settings](http://localhost:3000/admin/settings) page.
+* Open your web browser to http://localhost:4040 to access the Open WebUI web page.
+* Go to the administrator [settings](http://localhost:4040/admin/settings) page.
 * Go to the Image section (1)
 * Make sure all settings look good, and validate them pressing the refresh button (2)
 * (Optional) Save any changes if you made them. (3)
@@ -123,4 +123,7 @@ $ /llm/ollama/ollama -v
 
 ## References 
 * [Open WebUI documentation](https://docs.openwebui.com/)
-* [Intel ipex-llm releases](https://github.com/intel/ipex-llm/releases)
+* [Docker - Intel ipex-llm tags](https://hub.docker.com/r/intelanalytics/ipex-llm-serving-xpu/tags)
+* [Docker - Intel extension for pytorch](https://hub.docker.com/r/intel/intel-extension-for-pytorch/tags)
+* [GitHub - Intel ipex-llm tags](https://github.com/intel/ipex-llm/tags)
+* [GitHub - Intel extension for pytorch](https://github.com/intel/intel-extension-for-pytorch/tags)

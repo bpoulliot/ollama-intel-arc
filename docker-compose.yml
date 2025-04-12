@@ -1,7 +1,10 @@
 version: '3'
 services:
   ollama-intel-arc:
-    image: intelanalytics/ipex-llm-inference-cpp-xpu:latest
+    build:
+      context: ipex-llm-inference-cpp-xpu
+      dockerfile: Dockerfile
+    image: ipex-llm-inference-cpp-xpu:latest
     container_name: ollama-intel-arc
     restart: unless-stopped
     devices:
@@ -27,7 +30,7 @@ services:
     depends_on:
       - ollama-intel-arc
     ports:
-      - 3000:8080
+      - 4040:8080
     environment:
       - WEBUI_AUTH=False
       - ENABLE_OPENAI_API=False
@@ -36,9 +39,9 @@ services:
       - IMAGE_GENERATION_ENGINE=automatic1111
       - IMAGE_GENERATION_MODEL=dreamshaper_8
       - IMAGE_SIZE=400x400
-      - IMAGE_STEPS=30
+      - IMAGE_STEPS=8
       - AUTOMATIC1111_BASE_URL=http://sdnext-ipex:7860/
-      - AUTOMATIC1111_CFG_SCALE=9
+      - AUTOMATIC1111_CFG_SCALE=2
       - AUTOMATIC1111_SAMPLER=DPM++ SDE
       - AUTOMATIC1111_SCHEDULER=Karras
     extra_hosts:
