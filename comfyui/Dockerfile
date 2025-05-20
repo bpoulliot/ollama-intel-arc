@@ -1,4 +1,4 @@
-FROM intel/intel-extension-for-pytorch:2.6.10-xpu
+FROM intel/intel-extension-for-pytorch:2.7.10-xpu
 
 # optional, might help with memory allocation performance and scalability
 RUN apt-get update && \

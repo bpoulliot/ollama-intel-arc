@@ -1,4 +1,4 @@
-FROM intel/intel-extension-for-pytorch:2.6.10-xpu
+FROM intel/intel-extension-for-pytorch:2.7.10-xpu
 
 # set paths to use with sdnext
 ENV SD_DATADIR="/mnt/data"
