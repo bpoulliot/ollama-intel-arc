@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   sdnext-ipex:
     image: disty0/sdnext-ipex:latest
