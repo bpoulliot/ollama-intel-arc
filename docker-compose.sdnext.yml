@@ -2,10 +2,7 @@ version: '3'
 
 services:
   sdnext-ipex:
-    build:
-      context: sdnext
-      dockerfile: Dockerfile
-    image: sdnext-ipex:latest
+    image: disty0/sdnext-ipex:latest
     container_name: sdnext-ipex
     restart: unless-stopped
     devices:
