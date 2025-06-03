@@ -4,7 +4,9 @@ services:
     container_name: ollama-intel-arc
     restart: unless-stopped
     devices:
-      - /dev/dri:/dev/dri
+      # specify dGPU on most systems as card0 and D128 are iGPU
+      - /dev/dri/card1:/dev/dri/card1
+      - /dev/dri/renderD129:/dev/dri/renderD129
     volumes:
       - ollama-volume:/root/.ollama
     ports:
@@ -49,7 +51,9 @@ services:
     container_name: sdnext-ipex
     restart: unless-stopped
     devices:
-      - /dev/dri:/dev/dri
+      # specify dGPU on most systems as card0 and D128 are iGPU
+      - /dev/dri/card1:/dev/dri/card1
+      - /dev/dri/renderD129:/dev/dri/renderD129
     ports:
       - 14080:7860
     volumes:
